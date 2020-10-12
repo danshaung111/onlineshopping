@@ -36,24 +36,42 @@
 				</tfoot>
 				<tbody>
 
-					<?php
-						$sql = "SELECT * FROM items";
-						$stmt = $pdo->prepare($sql);
-						$stmt->execute();
-						$items=$stmt->fetchAll();
+					<?php 
+							$sql="SELECT * FROM items";
+							$stmt=$pdo->prepare($sql);
+							$stmt->execute();
+							$items=$stmt->fetchAll();
+							$i=1;
 
-						foreach ($items as $item) {
-					?>
-					<tr>
-						<td>1</td>
-						<td><?php echo $item['name']; ?></td>
-						<td><?php echo $item['codeno']; ?></td>
-						<td><?php echo $item['price']; ?></td>
-						<td><a href="#" class="btn btn-outline-primary btn-sm">Detail</a>
-						<a href="#" class="btn btn-outline-warning btn-sm">Edit</a>
-						<a href="#" class="btn btn-outline-danger btn-sm">Delete</a></td>
-					</tr>
-				<?php } ?>
+							foreach ($items as $item) {
+							
+						?>
+						<tr>
+							<td><?php echo $i++;?></td>
+							<td><?php echo $item['name']; ?></td>
+							<td><?php echo $item['codeno']; ?></td>
+							<td>
+								<?php 
+
+									if ($item['discount']) {
+										echo $item['discount']." MMK";
+								?>
+
+								<del><?php echo $item['price']." MMK"; ?></del>
+								<?php 
+
+									}else{
+										echo $item['price']." MMK";
+									}
+
+								?>
+									
+								</td>
+							<td><a href="item_detail.php?id=<?php echo $item['id'] ?>" class="btn btn-outline-primary btn-sm">Detail</a> <a href="#" class="btn btn-outline-warning btn-sm">Edit</a> <a href="item_detail_delete.php?id=<?php echo $item['id'] ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item')">Delete</a></td>
+
+						</tr>
+
+					<?php } ?>
 
 				</tbody>
 			</table>

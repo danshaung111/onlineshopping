@@ -1,6 +1,7 @@
 <?php
 	
 	include 'include/header.php';
+	include 'dbconnect.php';
 ?>
 
 <!-- Page Heading -->
@@ -33,12 +34,45 @@
 				<div class="tab-pane fade" id="discount" role="tabpanel" aria-labelledby="profile-tab"><input type="number" name="discount" class="form-control my-3" placeholder="Discount Price"></div>
 			</div>
 			<div class="form-group">
-				<label for="brand">Brand</label>
-				<input type="number" name="brand" id="brand" class="form-control">
+					<label for="brand">Brand</label>
+					<select class="form-control" name="brand" id="brand">
+						<option>Choose...</option>
+
+						<?php
+							$sql="SELECT * FROM brands";
+							$stmt=$pdo->prepare($sql);
+							$stmt->execute();
+							$brands=$stmt->fetchAll();
+
+							foreach ($brands as $brand) {
+
+						?>
+						<option value="<?php echo $brand['id']; ?>"><?php echo $brand['name']; ?></option>
+
+					<?php } ?>
+
+					</select>
 			</div>
+
 			<div class="form-group">
 				<label for="subcategory">Subcategory</label>
-				<input type="number" name="subcategory" id="subcategory" class="form-control">
+				<select class="form-control" name="subcategory" id="subcategory">
+					<option>Choose...</option>
+
+					<?php
+						$sql="SELECT * FROM subcategories";
+						$stmt=$pdo->prepare($sql);
+						$stmt->execute();
+						$subcategories=$stmt->fetchAll();
+
+						foreach ($subcategories as $subcategorie) {
+						
+					?>
+					<option value="<?php echo $subcategorie['id']; ?>"><?php echo $subcategorie['name']; ?></option>
+					
+				<?php } ?>
+
+				</select>
 			</div>
 			<div class="form-group">
 				<label for="description">Description</label>
