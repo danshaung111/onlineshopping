@@ -1,6 +1,9 @@
 <?php
+session_start();
+if (isset($_SESSION['loginuser']) && $_SESSION['loginuser']['role_name']=="Admin" ) {
 	
 	include 'include/header.php';
+	include 'dbconnect.php';
 ?>
 
 <!-- Page Heading -->
@@ -18,7 +21,23 @@
 			</div>
 			<div class="form-group">
 				<label for="category">Category_Id</label>
-				<input type="number" name="category" id="category" class="form-control">
+				<select class="form-control" name="category" id="category">
+						<option>Choose...</option>
+
+						<?php
+							$sql="SELECT * FROM categories";
+							$stmt=$pdo->prepare($sql);
+							$stmt->execute();
+							$categories=$stmt->fetchAll();
+
+							foreach ($categories as $categorie) {
+
+						?>
+						<option value="<?php echo $categorie['id']; ?>"><?php echo $categorie['name']; ?></option>
+
+					<?php } ?>
+
+					</select>
 			</div>
 			<input type="submit" class="btn btn-primary float-right" value="Save">
 		</form>
@@ -28,4 +47,7 @@
 <?php
 	
 	include 'include/footer.php';
+}else{
+  header("location:../onlineshop/index.php");
+}
 ?>

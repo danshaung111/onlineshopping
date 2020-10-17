@@ -83,6 +83,18 @@
           <span>Subcategories List</span></a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="order_list.php">
+          <i class="fas fa-list-alt"></i>
+          <span>Order List</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="confirm_list.php">
+          <i class="fas fa-list-alt"></i>
+          <span>Confirm List</span></a>
+      </li>
+
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -295,8 +307,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['loginuser']['name']; ?></span>
+                <img class="img-profile rounded-circle" src="<?php echo $_SESSION['loginuser']['photo']; ?>">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

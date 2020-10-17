@@ -5,7 +5,7 @@
 	$photo=$_FILES['logo'];;
 
 	$basepath = "img/items/";
-	$fullpath = $basepath.$photo['logo'];
+	$fullpath = $basepath.$photo['name'];
 	move_uploaded_file($photo['tmp_name'], $fullpath);
 
 	// echo "$name and $price and $discount and $brand and $subcategory and $description and $codeno <br>";

@@ -1,4 +1,6 @@
 <?php
+session_start();
+if (isset($_SESSION['loginuser']) && $_SESSION['loginuser']['role_name']=="Admin" ) {
 	
 	include 'include/header.php';
 	include 'dbconnect.php';
@@ -44,8 +46,8 @@
 					<tr>
 						<td><?php echo $i++; ?></td>
 						<td><?php echo $brand['name']; ?></td>
-						<td><a href="#" class="btn btn-outline-primary btn-sm">Detail</a>
-						<a href="#" class="btn btn-outline-warning btn-sm">Edit</a>
+						<td><a href="brand_detail.php?id=<?php echo $brand['id'] ?>" class="btn btn-outline-primary btn-sm">Detail</a>
+						<a href="brand_edit.php?id=<?php echo $brand['id'] ?>" class="btn btn-outline-warning btn-sm">Edit</a>
 						<a href="brand_list_delete.php?id=<?php echo $brand['id'] ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item')">Delete</a></td>
 					</tr>
 				<?php } ?>
@@ -59,4 +61,7 @@
 <?php
 	
 	include 'include/footer.php';
+}else{
+  header("location:../onlineshop/index.php");
+}
 ?>

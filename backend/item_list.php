@@ -1,5 +1,7 @@
 <?php
-	
+session_start();
+if (isset($_SESSION['loginuser']) && $_SESSION['loginuser']['role_name']=="Admin" ) {
+
 	include 'include/header.php';
 	include 'dbconnect.php';
 ?>
@@ -67,7 +69,7 @@
 								?>
 									
 								</td>
-							<td><a href="item_detail.php?id=<?php echo $item['id'] ?>" class="btn btn-outline-primary btn-sm">Detail</a> <a href="#" class="btn btn-outline-warning btn-sm">Edit</a> <a href="item_detail_delete.php?id=<?php echo $item['id'] ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item')">Delete</a></td>
+							<td><a href="item_detail.php?id=<?php echo $item['id'] ?>" class="btn btn-outline-primary btn-sm">Detail</a> <a href="item_edit.php?id=<?php echo $item['id'] ?>" class="btn btn-outline-warning btn-sm">Edit</a> <a href="item_detail_delete.php?id=<?php echo $item['id'] ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item')">Delete</a></td>
 
 						</tr>
 
@@ -82,4 +84,7 @@
 <?php
 	
 	include 'include/footer.php';
+}else{
+  header("location:../onlineshop/index.php");
+}
 ?>
